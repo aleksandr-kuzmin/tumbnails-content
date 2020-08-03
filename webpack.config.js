@@ -8,11 +8,14 @@ const common = {
   // module: {
   //   rules: [
   //     {
-  //       test: /\.(js|jsx)$/,
+  //       test: /\.worker\.js$/,
   //       exclude: /node_modules/,
-  //       use: ['babel-loader']
-  //     }
-  //   ]
+  //       loader: 'worker-loader',
+  //       options: {
+  //         esModule: false,
+  //       },
+  //     },
+  //   ],
   // },
   output: {
     path: distDir,
