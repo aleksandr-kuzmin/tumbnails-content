@@ -1,3 +1,5 @@
+console.log('canvas-worker')
+
 function drawHouse(ctx) {
   ctx.fillStyle = "black";
   ctx.lineWidth = 10
@@ -9,6 +11,7 @@ function drawHouse(ctx) {
   ctx.lineTo(250, 140)
   ctx.closePath()
   ctx.stroke()
+  postMessage('draw house from canvas-worker')
 }
 
 function drawText(ctx) {
@@ -16,6 +19,7 @@ function drawText(ctx) {
   ctx.fillStyle = "orangered";
   ctx.textBaseline = "top";
   ctx.fillText('Some text', 300, 100)
+  postMessage('draw text from canvas-worker')
 }
 
 function draw(ctx) {

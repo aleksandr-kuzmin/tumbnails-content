@@ -1,6 +1,6 @@
 const path = require('path')
 
-const srcDir = path.resolve(__dirname, 'src', 'client')
+const srcDir = path.resolve(__dirname, 'src')
 const distDir = path.resolve(__dirname, 'dist')
 
 const common = {
@@ -12,7 +12,7 @@ const common = {
         exclude: /node_modules/,
         loader: 'worker-loader',
         options: {
-          // publicPath: '/dist/'
+          filename: '[name].[contenthash].worker.js',
         },
       },
     ],
@@ -21,7 +21,7 @@ const common = {
     path: distDir,
     filename: 'index.js',
     publicPath: '/dist/'
-  }
+  },
 }
 
 const development = {
