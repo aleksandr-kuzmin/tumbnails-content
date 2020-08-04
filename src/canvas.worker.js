@@ -1,4 +1,9 @@
-console.log('canvas-worker')
+console.log('canvas-worker: load')
+
+function clear(ctx, width, height) {
+  ctx.clearRect(0, 0, width, height)
+  postMessage('canvas-worker: clear')
+}
 
 function drawHouse(ctx) {
   ctx.fillStyle = "black";
@@ -11,7 +16,7 @@ function drawHouse(ctx) {
   ctx.lineTo(250, 140)
   ctx.closePath()
   ctx.stroke()
-  postMessage('draw house from canvas-worker')
+  postMessage('canvas-worker: drawHouse')
 }
 
 function drawText(ctx) {
@@ -19,7 +24,7 @@ function drawText(ctx) {
   ctx.fillStyle = "orangered";
   ctx.textBaseline = "top";
   ctx.fillText('Some text', 300, 100)
-  postMessage('draw text from canvas-worker')
+  postMessage('canvas-worker: drawText')
 }
 
 function draw(ctx) {
@@ -31,6 +36,11 @@ onmessage = (e) => {
   switch (e.data.type) {
     case 'init':
       self.offscreen = e.data.offscreen
+      postMessage('canvas-worker: init')
+      break
+    case 'clear':
+      const ctx = self.offscreen.getContext('2d')
+      clear(ctx, self.offscreen.width, self.offscreen.height)
       break
     case 'draw':
       if (self.fonts.size > 0) {

@@ -7,7 +7,8 @@ const printWorkerMessage = (e) => {
 
 window.onload = () => {
   const canvas = document.getElementById('canvas')
-  const button  = document.getElementById('button')
+  const clearButton  = document.getElementById('clear-button')
+  const drawButton = document.getElementById('draw-button')
 
   const someWorker = new SomeWorker()
   someWorker.onmessage = printWorkerMessage
@@ -18,7 +19,11 @@ window.onload = () => {
   var offscreen = canvas.transferControlToOffscreen()
   worker.postMessage({ type: 'init', offscreen }, [offscreen])
 
-  button.onclick = () => {
+  clearButton.onclick = () => {
+    worker.postMessage({ type: 'clear' })
+  }
+
+  drawButton.onclick = () => {
     worker.postMessage({ type: 'draw' })
     someWorker.postMessage({ type: 'some-message' })
   }

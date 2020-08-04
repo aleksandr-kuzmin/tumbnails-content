@@ -1,12 +1,12 @@
-console.log('some-worker')
+console.log('some-worker: load')
 
 onmessage = (e) => {
   switch (e.data.type) {
     case 'init':
-      postMessage('some-worker received init')
+      postMessage('some-worker: init')
       break
     case 'some-message':
-      postMessage('some-worker received some-message')
+      postMessage('some-worker: some-message')
       break
   }
 }
