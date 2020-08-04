@@ -1,25 +1,26 @@
 const path = require('path')
 
 const srcDir = path.resolve(__dirname, 'src', 'client')
-const distDir = path.resolve(__dirname, 'static')
+const distDir = path.resolve(__dirname, 'dist')
 
 const common = {
   entry: path.join(srcDir, 'index.js'),
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.worker\.js$/,
-  //       exclude: /node_modules/,
-  //       loader: 'worker-loader',
-  //       options: {
-  //         esModule: false,
-  //       },
-  //     },
-  //   ],
-  // },
+  module: {
+    rules: [
+      {
+        test: /\.worker\.js$/,
+        exclude: /node_modules/,
+        loader: 'worker-loader',
+        options: {
+          // publicPath: '/dist/'
+        },
+      },
+    ],
+  },
   output: {
     path: distDir,
-    filename: 'index.js'
+    filename: 'index.js',
+    publicPath: '/dist/'
   }
 }
 
