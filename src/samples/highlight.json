@@ -1,0 +1,31 @@
+{
+  "content": {
+      "x": 87.18,
+      "y": 110.32,
+      "type": "highlight",
+      "owner": 84529657,
+      "controlPoints": [
+          0,
+          0,
+          0,
+          306.38
+      ],
+      "brushType": "square",
+      "fillAlpha": 0.5,
+      "fillColor": "ffff00",
+      "lineWidth": 214.46486486486484,
+      "width": 214.46486486486484,
+      "height": 520.8448648648648,
+      "subType": "none"
+  },
+  "pageId": 0,
+  "group": "tools",
+  "type": "highlight",
+  "subType": "none",
+  "enabled": true,
+  "initial": true,
+  "element": {
+      "clientId": 1,
+      "localId": 14
+  }
+}

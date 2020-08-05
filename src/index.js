@@ -1,30 +1,36 @@
-import CanvasWorker from './canvas.worker.js'
-import SomeWorker from './some.worker.js'
+import { createDraw } from './draw'
 
-const printWorkerMessage = (e) => {
-  console.log(e.data)
+import highlight from './samples/highlight.json'
+
+const DEFAULT_CANVAS_SIZE = {
+  WIDTH: 142,
+  HEIGHT: 188
 }
+
+const DEFAULT_PAGE_SIZE = {
+  WIDTH: 872,
+  HEIGHT: 1158.6
+}
+
+const initCanvasSize = (canvas, scale) => {
+  canvas.width = DEFAULT_CANVAS_SIZE.WIDTH * scale
+  canvas.height = DEFAULT_CANVAS_SIZE.HEIGHT * scale
+}
+
+const DEFAULT_CANVAS_SCALE = 3
 
 window.onload = () => {
   const canvas = document.getElementById('canvas')
-  const clearButton  = document.getElementById('clear-button')
   const drawButton = document.getElementById('draw-button')
 
-  const someWorker = new SomeWorker()
-  someWorker.onmessage = printWorkerMessage
-  someWorker.postMessage({ type: 'init' })
+  initCanvasSize(canvas, DEFAULT_CANVAS_SCALE)
 
-  const worker = new CanvasWorker()
-  worker.onmessage = printWorkerMessage
-  var offscreen = canvas.transferControlToOffscreen()
-  worker.postMessage({ type: 'init', offscreen }, [offscreen])
-
-  clearButton.onclick = () => {
-    worker.postMessage({ type: 'clear' })
-  }
+  const draw = createDraw()
 
   drawButton.onclick = () => {
-    worker.postMessage({ type: 'draw' })
-    someWorker.postMessage({ type: 'some-message' })
+    draw(canvas, DEFAULT_PAGE_SIZE.WIDTH, DEFAULT_PAGE_SIZE.HEIGHT, [highlight])
+    console.log('draw')
   }
+
+  draw(canvas, DEFAULT_PAGE_SIZE.WIDTH, DEFAULT_PAGE_SIZE.HEIGHT, [highlight])
 }
