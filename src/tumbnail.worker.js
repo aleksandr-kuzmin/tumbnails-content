@@ -21,8 +21,19 @@ function drawHighlight(ctx, x, y, width, height, content) {
   drawRect(ctx, x, y, width, height, fillColor, fillAlpha)
 }
 
+function drawText(ctx, x, y, width, height, content) {
+  const italic = content.italic ? 'italic ' : ''
+  const bold = content.bold ? 'bold ' : ''
+  // FIXME: fontSize / x ???
+  ctx.font = italic + bold + `${content.fontSize / 2.5}px ${content.fontFamily}`
+  ctx.fillStyle = `#${content.fontColor}`
+  ctx.globalAlpha = 1
+  ctx.fillText(content.text, x, y)
+}
+
 const elementHandlers = {
-  'highlight': drawHighlight
+  'highlight': drawHighlight,
+  'text': drawText
 }
 
 function draw(data) {

@@ -1,6 +1,7 @@
 import { createDraw } from './draw'
 
 import highlight from './samples/highlight.json'
+import text from './samples/text.json'
 
 const DEFAULT_CANVAS_SIZE = {
   WIDTH: 142,
@@ -27,10 +28,14 @@ window.onload = () => {
 
   const draw = createDraw()
 
+  const drawElements = () => {
+    draw(canvas, DEFAULT_PAGE_SIZE.WIDTH, DEFAULT_PAGE_SIZE.HEIGHT, [highlight, text])
+  }
+
   drawButton.onclick = () => {
-    draw(canvas, DEFAULT_PAGE_SIZE.WIDTH, DEFAULT_PAGE_SIZE.HEIGHT, [highlight])
+    drawElements()
     console.log('draw')
   }
 
-  draw(canvas, DEFAULT_PAGE_SIZE.WIDTH, DEFAULT_PAGE_SIZE.HEIGHT, [highlight])
+  drawElements()
 }
