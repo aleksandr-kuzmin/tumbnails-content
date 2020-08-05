@@ -1,4 +1,4 @@
-import TumbnailDrawWorker from './tumbnail.worker.js'
+import TumbnailDrawWorker from './workers/tumbnail.worker.js'
 
 export const createDraw = () => {
   let worker
