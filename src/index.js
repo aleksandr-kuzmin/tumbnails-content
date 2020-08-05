@@ -1,4 +1,4 @@
-import { createDraw } from './draw'
+import { createDraw } from './create-draw'
 
 import highlight from './samples/highlight.json'
 import text from './samples/text.json'
