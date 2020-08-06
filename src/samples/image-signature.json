@@ -1,0 +1,35 @@
+{
+  "content": {
+    "x": 414.33,
+    "y": 318.45,
+    "type": "signature",
+    "owner": 84529657,
+    "subType": "image",
+    "width": 135,
+    "height": 135,
+    "id": 71636,
+    "imageId": 48624,
+    "stamp": {
+      "dateTime": {
+        "format": "MM/DD/YYYY",
+        "text": "08/05/2020"
+      },
+      "verification": {
+        "verifier": "pdffiller",
+        "verifierName": "PDFFiller"
+      }
+    },
+    "url": "https://dev3.pdffiller.com/flash/data/pics/NDg2MjQ7ODQ1Mjk2NTc=/75f7d658b2f8eb23df15f84db1f685db/0.png",
+    "dateStamp": "08/05/2020"
+  },
+  "pageId": 1,
+  "group": "tools",
+  "type": "signature",
+  "subType": "image",
+  "enabled": true,
+  "initial": true,
+  "element": {
+      "clientId": 1,
+      "localId": 19
+  }
+}

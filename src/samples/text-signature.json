@@ -1,0 +1,41 @@
+{
+  "content": {
+    "x": 360.55,
+    "y": 289.08,
+    "type": "signature",
+    "owner": 84529657,
+    "align": "left",
+    "valign": "top",
+    "width": 83.7,
+    "height": 91,
+    "subType": "text",
+    "bold": false,
+    "italic": false,
+    "underline": false,
+    "fontFamily": "Jellyka CuttyCupcakes",
+    "fontSize": 72,
+    "color": "000000",
+    "text": "Sign",
+    "dateStamp": "08/04/2020",
+    "stamp": {
+      "dateTime": {
+        "format": "MM/DD/YYYY",
+        "text": "08/04/2020"
+      },
+      "verification": {
+        "verifier": "pdffiller",
+        "verifierName": "PDFFiller"
+      }
+    }
+  },
+  "pageId": 0,
+  "group": "tools",
+  "type": "signature",
+  "subType": "text",
+  "enabled": true,
+  "initial": true,
+  "element": {
+    "clientId": 1,
+    "localId": 13
+  }
+}
