@@ -2,13 +2,12 @@ import { draw } from './draw/draw'
 import { generateColor } from './generator/palette'
 import { generateRectangleData } from './generator/rectangle'
 import { generateTextData } from './generator/text'
+import { generateCurveSignatureData } from './generator/curve-signature'
 import { generateTextSignatureData } from './generator/text-signature'
 import { createHighlight } from './primitives/create-highlight'
 import { createText } from './primitives/create-text'
 import { createTextSignature } from './primitives/create-text-signature'
-
-// import highlight from './samples/highlight.json'
-// import text from './samples/text.json'
+import { createCurveSignature } from './primitives/create-curve-signature'
 
 const DEFAULT_PAGE_SIZE = {
   width: 872,
@@ -29,12 +28,40 @@ const initCanvasSize = (canvas, scale) => {
   canvas.height = DEFAULT_CANVAS_SIZE.height * scale
 }
 
-const DEFAULT_CANVAS_SCALE = 3
+const DEFAULT_CANVAS_SCALE = 2
 const DEFAULT_ELEMENTS_COUNT = 1000
+const DEFAULT_ELEMENT_TYPE = 'highlight'
 
-const getN = () => {
+const getSearchParameter = (name) => {
   const url = new URL(window.location)
-  return parseInt(url.searchParams.get('n'), 10)
+  return url.searchParams.get(name)
+}
+
+const highlightCreator = () => {
+  const color = generateColor()
+  const { x, y, width, height } = generateRectangleData(PAGE_SIZE, MAX_SIZE, MIN_SIZE)
+  const highlight = createHighlight(color, x, y, width, height)
+  return highlight
+}
+
+const textSignatureCreator = () => {
+  const color = generateColor()
+  const { x, y, width, height, fontSize } =
+    generateTextSignatureData(PAGE_SIZE, MAX_SIZE, MIN_SIZE, 72, 12)
+  const signature = createTextSignature(x, y, width, height, fontSize, 'Arial', color, 'sign')
+  return signature
+}
+
+const curveSignatureCreator = () => {
+  const { x, y } = generateCurveSignatureData(PAGE_SIZE)
+  const signature = createCurveSignature(x, y)
+  return signature
+}
+
+const elementCreators = {
+  'highlight': highlightCreator,
+  'text-signature': textSignatureCreator,
+  'curve-signature': curveSignatureCreator,
 }
 
 window.onload = () => {
@@ -44,20 +71,12 @@ window.onload = () => {
 
   initCanvasSize(canvas, DEFAULT_CANVAS_SCALE)
 
-  const n = getN() || DEFAULT_ELEMENTS_COUNT
+  const n = parseInt(getSearchParameter('n'), 10) || DEFAULT_ELEMENTS_COUNT
+  const type = getSearchParameter('type') || DEFAULT_ELEMENT_TYPE
   const elements = []
-  // for (let i = 0; i < n; i++) {
-  //   const color = createColor()
-  //   const { x, y, width, height } = generateRectangleData(PAGE_SIZE, MAX_SIZE, MIN_SIZE)
-  //   const highlight = createHighlight(color, x, y, width, height)
-  //   elements.push(highlight)
-  // }
+  const elementCreator = elementCreators[type]
   for (let i = 0; i < n; i++) {
-    const color = generateColor()
-    const { x, y, width, height, fontSize } =
-      generateTextSignatureData(PAGE_SIZE, MAX_SIZE, MIN_SIZE, 72, 12)
-    const signature = createTextSignature(x, y, width, height, fontSize, 'Arial', color, 'sign')
-    elements.push(signature)
+    elements.push(elementCreator())
   }
 
   const drawElements = () => {
