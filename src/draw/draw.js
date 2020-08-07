@@ -33,6 +33,10 @@ function drawCurveSignature(ctx, x, y, width, height, scale, content) {
   }
 }
 
+function drawImageSignature(ctx, x, y, width, height, scale, context, img) {
+  ctx.drawImage(img, x, y, width, height)
+}
+
 const elementHandlers = {
   'highlight': {
     'none': drawHighlight,
@@ -42,11 +46,12 @@ const elementHandlers = {
   },
   'signature': {
     'text': drawTextSignature,
-    'curve': drawCurveSignature
+    'curve': drawCurveSignature,
+    'image': drawImageSignature
   }
 }
 
-export const draw = (canvas, width, height, elements) => {
+export const draw = (canvas, width, height, elements, img) => {
   const ctx = canvas.getContext('2d')
   const scale = {
     x: canvas.width / width,
@@ -63,7 +68,7 @@ export const draw = (canvas, width, height, elements) => {
       const y = content.y * scale.y
       const width = content.width * scale.x
       const height = content.height * scale.y
-      handler(ctx, x, y, width, height, scale, content)
+      handler(ctx, x, y, width, height, scale, content, img)
     }
   }
 }
