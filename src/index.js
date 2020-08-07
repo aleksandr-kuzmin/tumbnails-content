@@ -90,6 +90,7 @@ window.onload = () => {
     const canvas = document.getElementById('canvas')
     const clearButton = document.getElementById('clear-button')
     const drawButton = document.getElementById('draw-button')
+    const log = document.getElementById('log')
 
     initCanvasSize(canvas, DEFAULT_CANVAS_SCALE)
 
@@ -104,7 +105,9 @@ window.onload = () => {
     const drawElements = () => {
       const prevTime = Date.now()
       draw(canvas, PAGE_SIZE.width, PAGE_SIZE.height, elements, this)
-      console.log(`${Date.now() - prevTime}ms`)
+      const t = `${Date.now() - prevTime}ms`
+      log.value += t + '\n'
+      console.log(t)
     }
 
     clearButton.onclick = () => {
