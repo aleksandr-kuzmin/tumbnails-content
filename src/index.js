@@ -34,7 +34,7 @@ const initCanvasSize = (canvas, scale) => {
 
 const DEFAULT_CANVAS_SCALE = 2
 const DEFAULT_ELEMENTS_COUNT = 1000
-const DEFAULT_ELEMENT_TYPE = 'highlight'
+const DEFAULT_ELEMENT_TYPE = 'mixed'
 
 const getSearchParameter = (name) => {
   const url = new URL(window.location)
@@ -68,12 +68,21 @@ const imageSignatureCreator = () => {
   return signature
 }
 
+let elementTypeIndex = 0
+const mixedElementCreator = () => {
+  const creator = elementCreators[elementTypes[elementTypeIndex]]
+  elementTypeIndex = (elementTypeIndex + 1) % elementTypes.length
+  return creator()
+}
+
 const elementCreators = {
+  'mixed': mixedElementCreator,
   'highlight': highlightCreator,
   'text-signature': textSignatureCreator,
   'curve-signature': curveSignatureCreator,
   'image-signature': imageSignatureCreator
 }
+const elementTypes = Object.keys(elementCreators).filter(t => t != 'mixed')
 
 window.onload = () => {
   const img = new Image()
