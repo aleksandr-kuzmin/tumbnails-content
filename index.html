@@ -21,6 +21,26 @@
     #log {
       font-family: monospace;
     }
+    @font-face {
+      font-family: 'NewRockerEot';
+      src: url('./fonts/new-rocker-v9-latin/new-rocker-v9-latin-regular.eot') format('embedded-opentype');
+    }
+    /* @font-face {
+      font-family: 'NewRockerSvg';
+      src: url('./fonts/new-rocker-v9-latin/new-rocker-v9-latin-regular.svg');
+    } */
+    @font-face {
+      font-family: 'NewRockerTtf';
+      src: local('NewRockerTtf'), url('./fonts/new-rocker-v9-latin/new-rocker-v9-latin-regular.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'NewRockerWoff';
+      src: url('./fonts/new-rocker-v9-latin/new-rocker-v9-latin-regular.woff') format('woff');
+    }
+    @font-face {
+      font-family: 'NewRockerWoff2';
+      src: url('./fonts/new-rocker-v9-latin/new-rocker-v9-latin-regular.woff2') format('woff2');
+    }
   </style>
 </head>
 <body>
@@ -28,6 +48,13 @@
   <button id='draw-button'>Draw</button>
   <canvas id='canvas'></canvas>
   <textarea id='log' rows='10'></textarea><br>
+
+  <span id='some-text' style="font-family: 'NewRockerEof'">New rocker</span>
+  <span id='some-text' style="font-family: 'NewRockerSvg'">New rocker</span>
+  <span id='some-text' style="font-family: 'NewRockerTtf'">New rocker</span>
+  <span id='some-text' style="font-family: 'NewRockerWoff'">New rocker</span>
+  <span id='some-text' style="font-family: 'NewRockerWoff2'">New rocker</span>
+
   <script src="./dist/index.js"></script>
   <a href='http://192.168.1.149:8080/?n=1000&type=highlight'>/?n=1000&type=highlight</a><br>
   <a href='http://192.168.1.149:8080/?n=1000&type=text-signature'>/?n=1000&type=text-signature</a><br>

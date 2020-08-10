@@ -8,12 +8,12 @@ function drawHighlight(ctx, x, y, width, height, _scale, content) {
 function drawText(ctx, x, y, width, height, scale, content) {
   // NOTE: 0.73 - alphabetic baseline offset for 1.21 line height
   // y += height * 0.73
-  const fontSize = content.fontSize * scale.y
+  const fontSize = Math.floor(content.fontSize * scale.y)
   fillText(ctx, x, y, fontSize, content.fontColor, content.fontFamily, content.text)
 }
 
-function drawTextSignature(ctx, x, y, width, height, scale, content) {
-  const fontSize = content.fontSize * scale.y
+export function drawTextSignature(ctx, x, y, width, height, scale, content) {
+  const fontSize = Math.floor(content.fontSize * scale.y)
   fillText(ctx, x, y, fontSize, content.color, content.fontFamily, content.text)
 }
 

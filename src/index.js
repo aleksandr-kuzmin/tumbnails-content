@@ -1,7 +1,16 @@
 import 'url-polyfill';
-
+import 'core-js/modules/es.promise'
 import { draw } from './draw/draw'
+import { clear } from './draw/draw-primitives'
+import { main } from './main'
 import { performanceTest } from './performance-test'
+
+const DEFAULT_PAGE_SIZE = {
+  width: 872,
+  height: 1158.6
+}
+
+const PAGE_SIZE = DEFAULT_PAGE_SIZE
 
 const getSearchParameter = (name) => {
   const url = new URL(window.location)
@@ -20,9 +29,6 @@ const initCanvasSize = (canvas, scale) => {
 
 const DEFAULT_CANVAS_SCALE = 2
 
-const defaultMain = () => {
-}
-
 window.onload = () => {
   const canvas = document.getElementById('canvas')
   const clearButton = document.getElementById('clear-button')
@@ -33,17 +39,12 @@ window.onload = () => {
 
   const type = getSearchParameter('type')
   if (!type) {
-    defaultMain()
+    main(PAGE_SIZE, drawButton)
   } else {
-    performanceTest(type, canvas, (t) => {
+    performanceTest(type, PAGE_SIZE, canvas, (t) => {
       log.value += t + '\n'
       console.log(t)
     }, parseInt(getSearchParameter('n'), 10)).then((drawElements) => {
-      clearButton.onclick = () => {
-        draw(canvas, 0, 0, [])
-        console.log('clear')
-      }
-
       drawButton.onclick = () => {
         drawElements()
         console.log('draw')
@@ -51,5 +52,10 @@ window.onload = () => {
 
       drawElements()
     })
+  }
+
+  clearButton.onclick = () => {
+    clear(canvas.getContext('2d'))
+    console.log('clear')
   }
 }
